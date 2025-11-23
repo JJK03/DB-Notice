@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 5; // 1 페이지당 게시물 수
 
-// GET /free - 자유게시판 목록
+// 자유게시판 목록
 router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * POSTS_PER_PAGE;
@@ -39,12 +39,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /free/new - 자유게시판 작성 폼
+// 자유게시판 작성 폼
 router.get('/new', (req, res) => {
     res.render('free_board/form', { post: null });
 });
 
-// POST /free/new - 자유게시판 작성
+// 자유게시판 작성
 router.post('/new', async (req, res) => {
     const { title, author, content } = req.body;
     try {
@@ -56,7 +56,7 @@ router.post('/new', async (req, res) => {
     }
 });
 
-// GET /free/:id - 자유게시판 상세 보기
+// 자유게시판 상세 보기
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// GET /free/:id/edit - 자유게시판 수정 폼
+// 자유게시판 수정 폼
 router.get('/:id/edit', async (req, res) => {
     const { id } = req.params;
     try {
@@ -87,7 +87,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 });
 
-// POST /free/:id/edit - 자유게시판 수정
+// 자유게시판 수정
 router.post('/:id/edit', async (req, res) => {
     const { id } = req.params;
     const { title, author, content } = req.body;
@@ -100,7 +100,7 @@ router.post('/:id/edit', async (req, res) => {
     }
 });
 
-// POST /free/:id/delete - 자유게시판 삭제
+// 자유게시판 삭제
 router.post('/:id/delete', async (req, res) => {
     const { id } = req.params;
     try {

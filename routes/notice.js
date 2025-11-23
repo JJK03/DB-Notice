@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 5; // 1 페이지당 게시물 수
 
-// GET /notice - 공지사항 목록
+// 공지사항 목록
 router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const offset = (page - 1) * POSTS_PER_PAGE;
@@ -39,12 +39,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /notice/new - 공지사항 작성 폼
+// 공지사항 작성 폼
 router.get('/new', (req, res) => {
     res.render('notice/form', { post: null });
 });
 
-// POST /notice/new - 공지사항 작성
+// 공지사항 작성
 router.post('/new', async (req, res) => {
     const { title, author, content } = req.body;
     try {
@@ -56,7 +56,7 @@ router.post('/new', async (req, res) => {
     }
 });
 
-// GET /notice/:id - 공지사항 상세 보기
+// 공지사항 상세 보기
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// GET /notice/:id/edit - 공지사항 수정 폼
+// 공지사항 수정 폼
 router.get('/:id/edit', async (req, res) => {
     const { id } = req.params;
     try {
@@ -87,7 +87,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 });
 
-// POST /notice/:id/edit - 공지사항 수정
+// 공지사항 수정
 router.post('/:id/edit', async (req, res) => {
     const { id } = req.params;
     const { title, author, content } = req.body;
@@ -100,7 +100,7 @@ router.post('/:id/edit', async (req, res) => {
     }
 });
 
-// POST /notice/:id/delete - 공지사항 삭제
+// 공지사항 삭제
 router.post('/:id/delete', async (req, res) => {
     const { id } = req.params;
     try {
