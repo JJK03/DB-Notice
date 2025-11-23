@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<div class="board-container">
+    <h2>자유게시판</h2>
+
+    <div class="search-container">
+        <form action="/free" method="GET">
+            <input type="text" name="search" placeholder="제목 검색" value="<%= searchTerm %>">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+
+    <table class="board-table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach(post => { %>
+                <tr>
+                    <td><%= post.id %></td>
+                    <td><a href="/free/<%= post.id %>"><%= post.title %></a></td>
+                    <td><%= post.author %></td>
+                    <td><%= new Date(post.created_at).toLocaleDateString() %></td>
+                    <td><%= post.views %></td>
+                </tr>
+            <% }) %>
+            <% if (posts.length === 0) { %>
+                <tr>
+                    <td colspan="5">게시물이 없습니다.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <div class="board-actions">
+        <a href="/free/new" class="btn">글쓰기</a>
+    </div>
+
+    <%- include('../partials/pagination', { currentPage, totalPages, searchTerm }) %>
+</div>
+
+<%- include('../partials/footer') %>

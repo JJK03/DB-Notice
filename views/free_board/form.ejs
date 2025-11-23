@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<div class="board-container">
+    <h2><%= post ? '자유게시판 수정' : '자유게시판 작성' %></h2>
+    <form action="<%= post ? '/free/' + post.id + '/edit' : '/free/new' %>" method="POST" class="form-container">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="<%= post ? post.title : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="author">작성자</label>
+            <input type="text" id="author" name="author" value="<%= post ? post.author : '' %>" required>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea id="content" name="content" rows="10" required><%= post ? post.content : '' %></textarea>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn"><%= post ? '수정하기' : '작성하기' %></button>
+            <a href="/free" class="btn">취소</a>
+        </div>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

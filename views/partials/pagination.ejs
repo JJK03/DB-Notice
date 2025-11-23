@@ -1,0 +1,19 @@
+<% if (totalPages > 1) { %>
+<div class="pagination">
+    <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>&search=<%= searchTerm %>">이전</a>
+    <% } %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+        <% if (i === currentPage) { %>
+            <a href="#" class="active"><%= i %></a>
+        <% } else { %>
+            <a href="?page=<%= i %>&search=<%= searchTerm %>"><%= i %></a>
+        <% } %>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>&search=<%= searchTerm %>">다음</a>
+    <% } %>
+</div>
+<% } %>
